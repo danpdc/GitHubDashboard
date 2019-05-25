@@ -20,8 +20,8 @@ namespace GitHubDashboard.Web.Core
         public GitHubApiClient(HttpClient client)
         {
             _client = client;
-            _client.BaseAddress = new Uri("http://localhost:58022/");
-            _client.DefaultRequestHeaders.Add("User-Agent", "Git Dashboard with Blazor");
+            _client.BaseAddress = new Uri("https://gdblazor.azurewebsites.net");
+            _client.DefaultRequestHeaders.Add("User-Agent", "Git Dashboard with Blazor Prod");
         }
 
         public async Task<User> GetLoggedInUser(string token)
