@@ -1,0 +1,46 @@
+﻿
+@inherits GitHubDashboard.Web.Features.Repositories.MyRepos.MyReposModel;
+@page "/myrepos";
+@*@layout GitHubDashboard.Web.Features.Layout.MainLayout;*@
+@using GitHubDashboard.Domain.Models;
+
+
+@if (MyRepos == null)
+{
+    <em>Loading...</em>
+}
+else
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h4 class="card-title">My repositories</h4>
+                </div>
+                <div class="card-body">
+                    <DxDataGrid Data=@MyRepos
+                                PageSize="10"
+                                ShowPager="true">
+                        <DxDataGridColumn>
+                            <DisplayTemplate>
+                                <a href="/myrepos/@((context as Repository).Name)" class="btn btn-link btn-primary  edit"><i class="material-icons">info</i>Details</a>
+                            </DisplayTemplate>
+                        </DxDataGridColumn>
+                        <DxDataGridColumn Field=@nameof(Repository.Name) Caption="Name"></DxDataGridColumn>
+                        <DxDataGridColumn Field=@nameof(Repository.Description) Caption="Description"></DxDataGridColumn>
+                        <DxDataGridColumn Field=@nameof(Repository.Language) Caption="Language"></DxDataGridColumn>
+                        <DxDataGridColumn Field=@nameof(Repository.OpenIssuesCount) Caption="Open issues"></DxDataGridColumn>
+                        <DxDataGridColumn Field=@nameof(Repository.UpdatedAt) Caption="Last updated">
+                            <DisplayTemplate>
+                                @(((context as Repository).UpdatedAt).ToString("dddd, dd MMMM yyyy"))
+                            </DisplayTemplate>
+                        </DxDataGridColumn>
+                    </DxDataGrid>
+                </div>
+            </div>
+        </div>
+    </div>
+}

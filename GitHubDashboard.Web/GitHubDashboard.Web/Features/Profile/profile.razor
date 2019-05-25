@@ -1,0 +1,63 @@
+﻿
+@inherits GitHubDashboard.Web.Features.Profile.ProfileModel;
+@page "/profile";
+@layout GitHubDashboard.Web.Features.Layout.MainLayout;
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card card-profile">
+                <div class="card-avatar">
+                    <a href="/profile">
+                        <img class="img" src="@AppState.User.AvatarUrl" />
+                    </a>
+                </div>
+                <div class="card-body">
+                    @if (@AppState.User.Company != null || @AppState.User.Company != string.Empty)
+                    {
+                        <h6 class="card-category text-gray">@AppState.User.Company</h6>
+                    }
+
+                    <h4 class="card-title">@AppState.User.Name</h4>
+                    <p class="card-description">
+                        @AppState.User.Bio
+                    </p>
+
+                    @if (AppState.User.Location != null || AppState.User.Location != string.Empty)
+                    {
+                        <p class="card-description">
+                            <strong>Location:</strong> @AppState.User.Location
+                        </p>
+                    }
+
+                    @if (AppState.User.Email != null)
+                    {
+                        <p class="card-description">
+                            <strong>Email:</strong> @AppState.User.Email
+                        </p>
+                    }
+
+                    <p class="card-description">
+                        <strong>Followers:</strong> @AppState.User.Followers
+                    </p>
+                    <p class="card-description">
+                        <strong>Following:</strong> @AppState.User.Following
+                    </p>
+
+                    @if (AppState.User.Type != null)
+                    {
+                        <p class="card-description">
+                            <strong>User type:</strong> @AppState.User.Type
+                        </p>
+                    }
+
+                    @if (AppState.User.Blog != null)
+                    {
+                        <a href="@AppState.User.Blog" class="btn btn-rose btn-round" target="_blank">Blog</a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

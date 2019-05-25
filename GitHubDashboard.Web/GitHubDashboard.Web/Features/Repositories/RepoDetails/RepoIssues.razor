@@ -1,0 +1,61 @@
+﻿
+@inherits GitHubDashboard.Web.Features.Repositories.RepoDetails.RepoIssuesModel;
+@*@layout GitHubDashboard.Web.Features.Layout.MainLayout;*@
+@using GitHubDashboard.Domain.Models;
+
+@if (Issues == null)
+{
+    <h3 class="text-success">Loading....</h3>
+}
+else if (Issues.Count == 0)
+{
+    <h3 class="text-secondary">No issues associated to the repository</h3>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <DxDataGrid Data=@Issues
+                        PageSize="10"
+                        ShowPager="true">
+                <DxDataGridColumn Field=@nameof(Issue.Number) Caption="Number"></DxDataGridColumn>
+                <DxDataGridColumn Field=@nameof(Issue.Title) Caption="Name"></DxDataGridColumn>
+                <DxDataGridColumn Field=@nameof(Issue.Body) Caption="Description"></DxDataGridColumn>
+                <DxDataGridColumn Caption="Author">
+                    <DisplayTemplate>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="@(((context as Issue).User).AvatarUrl)"
+                                     alt="@(((context as Issue).User).Login)"
+                                     class="rounded-circle img-fluid">
+                            </div>
+                            <div class="col-md8">
+                                <p class="text-dark">@(((context as Issue).User).Login)</p>
+                            </div>
+                        </div>
+                    </DisplayTemplate>
+                </DxDataGridColumn>
+                <DxDataGridColumn Caption="Assignees">
+                    <DisplayTemplate>
+                        @foreach (var assignee in ((context as Issue).Assignees))
+                        {
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="photo">
+                                    <img src="@assignee.AvatarUrl" alt="@assignee.Login" class="rounded-circle img-fluid">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="user-info">
+                                    <p>@assignee.Login</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        }
+                    </DisplayTemplate>
+                </DxDataGridColumn>
+            </DxDataGrid>
+        </div>
+    </div>
+}

@@ -1,0 +1,23 @@
+﻿
+@inherits GitHubDashboard.Web.Features.Repositories.RepoDetails.RepoBranchesModel;
+@*@layout GitHubDashboard.Web.Features.Layout.MainLayout;*@
+
+<div class="row">
+    @if(Branches.Count == 0)
+    {
+        <h2 class="text-primary">Loading....</h2>
+    }
+    else
+    {
+        @foreach(var branch in Branches)
+        {
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="text-primary"><strong>Branch name:</strong> @branch.Name</p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

@@ -1,0 +1,78 @@
+﻿
+@inherits GitHubDashboard.Web.Shared.SidebarModel;
+
+    <div class="sidebar" data-color="rose" data-background-color="black" data-image="/assets/img/sidebar-1.jpg">
+        <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+        <div class="logo">
+            <a href="/" class="simple-text logo-mini">
+                GD
+            </a>
+            <a href="/" class="simple-text logo-normal">
+                Git Dashboard
+            </a>
+        </div>
+        <div class="sidebar-wrapper">
+            <div class="user">
+                <div class="photo">
+                    <img src="@AppState.User.AvatarUrl" />
+                </div>
+                <div class="user-info">
+                    <a data-toggle="collapse" href="#collapse" class="username">
+                        <span>
+                            @AppState.User.Name
+                            <b class="caret"></b>
+                        </span>
+                    </a>
+                    <div class="collapse" id="collapse">
+                        <ul class="nav">
+                            <li class="nav-item @ProfileActive" onclick="@SetProfileActive">
+                                <a class="nav-link" href="/profile">
+                                    <span class="sidebar-mini"> MP </span>
+                                    <span class="sidebar-normal"> My Profile </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav">
+                <li class="nav-item @DashBoardActive " onclick="@SetDashboardActive">
+                    <a class="nav-link" href="/">
+                        <i class="material-icons">dashboard</i>
+                        <p> Dashboard </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#repos">
+                        <i class="material-icons">code</i>
+                        <p>
+                            Repos
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="repos">
+                        <ul class="nav">
+                            <li class="nav-item @ReposActive" onclick="@SetReposActive">
+                                <a class="nav-link" href="/myrepos">
+                                    <span class="sidebar-mini">  MR </span>
+                                    <span class="sidebar-normal"> My repos </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item @ActivityActive" onclick="@SetActivityActive">
+                    <a class="nav-link" href="/">
+                        <i class="material-icons">apps</i>
+                        <p>
+                            Activity
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>

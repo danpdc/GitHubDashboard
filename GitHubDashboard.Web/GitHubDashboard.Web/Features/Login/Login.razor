@@ -1,0 +1,31 @@
+﻿@inherits GitHubDashboard.Web.Features.Login.LoginModel;
+@page "/login";
+
+    <div class="wrapper wrapper-full-page">
+        <div class="page-header login-page header-filter" filter-color="black" style="background-image: url('img/login.jpg'); background-size: cover; background-position: top center;">
+            <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+            <div class="container">
+                <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
+                    <div class="card card-login">
+                        <div class="card-header card-header-rose text-center">
+                            <h4 class="card-title">Login with GitHub</h4>
+                            <div class="social-line">
+                                <a class="btn btn-just-icon btn-link btn-white btn-lg" href="https://github.com/login/oauth/authorize?client_id=9e4335c082def436561f&scope=user%20repo%20notifications">
+                                    <i class="fa fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container">
+                    <div class="copyright">
+                        &copy;
+                        @CurrentYear  #Blazor FTW!
+                    </div>
+                </div>
+            </footer>
+        </div>
+        
+    </div>
