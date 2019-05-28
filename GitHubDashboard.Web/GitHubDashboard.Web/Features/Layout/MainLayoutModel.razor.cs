@@ -12,8 +12,19 @@ namespace GitHubDashboard.Web.Features.Layout
         public MainLayoutModel()
         {
             CurrentYear = DateTime.Now.Year.ToString();
+            IsAuthenticated = false;
+            AuthCheckProcessCompleted = false;
         }
         public string CurrentYear { get; set; }
+        public bool IsAuthenticated { get; set; }
+        public bool AuthCheckProcessCompleted { get; set; }
+
+        protected async override Task OnAfterRenderAsync()
+        {
+            IsAuthenticated = await AppState.CheckIfAuthenticated();
+            AuthCheckProcessCompleted = true;
+            StateHasChanged();
+        }
 
     }
 }

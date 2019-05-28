@@ -2,30 +2,39 @@
 @using GitHubDashboard.Web.Features.Login;
 @using GitHubDashboard.Web.Shared;
 
-@if (AppState.IsLoggedIn)
+
+@if (AuthCheckProcessCompleted == false)
 {
-    <div class="wrapper">
-        <div class="wrapper">
-            <Sidebar></Sidebar>
-            <div class="main-panel">
-                <NavMenu></NavMenu>
-                <div class="content">
-                    @Body
-                    <footer class="footer">
-                        <div class="container">
-                            <div class="copyright">
-                                &copy;
-                                @CurrentYear. #Blazor FTW! 
-                            </div>
-                        </div>
-                    </footer>
-                </div>
-            </div>
-        </div>
-    </div>
+    <em>Loading....</em>
 }
 else
 {
-    <Login></Login>
+    @if (IsAuthenticated)
+    {
+        <div class="wrapper">
+            <div class="wrapper">
+                <Sidebar></Sidebar>
+                <div class="main-panel">
+                    <NavMenu></NavMenu>
+                    <div class="content">
+                        @Body
+                        <footer class="footer">
+                            <div class="container">
+                                <div class="copyright">
+                                    &copy;
+                                    @CurrentYear. #Blazor FTW!
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <Login></Login>
+    }
 }
+
 
