@@ -46,7 +46,22 @@ namespace GitHubDashboard.Web.Core
 
         public async Task Logout()
         {
+            await _storage.RemoveItemAsync("token");
             IsLoggedIn = false;
+            User = null;
+        }
+
+        public async Task<bool> CheckIfAuthenticated()
+        {
+            var token = await _storage.GetItemAsync<string>("token");
+            if (token != null)
+            {
+                Token = token;
+                User = await _apiClient.GetLoggedInUser(Token);
+                return true;
+            }
+            else
+                return false;
         }
 
         private async Task SaveToken(HttpResponseMessage response)
@@ -54,9 +69,8 @@ namespace GitHubDashboard.Web.Core
             var responseContent = await response.Content.ReadAsStringAsync();
             var jwt = Json.Deserialize<GitHubTokenResponse>(responseContent);
             Token = jwt.access_token;
-            //await _storage.SetItemAsync("token", jwt.access_token);
+            await _storage.SetItemAsync("token", jwt.access_token);
             //var token = await _storage.GetItemAsync<string>("token");
         }
-
     }
 }

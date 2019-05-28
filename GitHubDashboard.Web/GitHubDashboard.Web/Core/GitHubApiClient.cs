@@ -21,7 +21,7 @@ namespace GitHubDashboard.Web.Core
         {
             _client = client;
             _client.BaseAddress = new Uri("https://gdblazor.azurewebsites.net");
-            _client.DefaultRequestHeaders.Add("User-Agent", "Git Dashboard with Blazor Prod");
+            _client.DefaultRequestHeaders.Add("User-Agent", "Git Dashboard with Blazor Dev");
         }
 
         public async Task<User> GetLoggedInUser(string token)
